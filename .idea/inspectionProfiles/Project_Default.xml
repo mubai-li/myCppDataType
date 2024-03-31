@@ -1,0 +1,60 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="DuplicatedCode" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <Languages>
+        <language minSize="106" name="Python" />
+      </Languages>
+    </inspection_tool>
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="pandas" />
+            <item index="1" class="java.lang.String" itemvalue="numpy" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="W605" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N802" />
+          <option value="N806" />
+          <option value="N803" />
+          <option value="N801" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="type._init_parameters" />
+          <option value="dict.get" />
+          <option value="type.*" />
+          <option value="min_passe" />
+          <option value="max_passe" />
+          <option value="save_cg_fields" />
+          <option value="dict.pop" />
+          <option value="object.__getattr__" />
+          <option value="object.__get__" />
+          <option value="list.__getitem__" />
+          <option value="simulation_client_win32.tools.siwave_tools.AbstractSiwave.get_project_file_path" />
+          <option value="_dict_keys.__getitem__" />
+          <option value="PySide6.QtWidgets.clicked.connect" />
+          <option value="list.removeRow" />
+          <option value="PySide6.QtWidgets.accepted.connect" />
+          <option value="PySide6.QtWidgets.rejected.connect" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
