@@ -52,6 +52,14 @@ public:
     bool operator>(const Value &aOther) const;
 
     bool operator<(const Value &aOther) const;
+    // NOLINTNEXTLINE
+    operator char *() const;
+
+    // NOLINTNEXTLINE
+    operator std::string() const;
+
+    // NOLINTNEXTLINE
+    operator char() const;
 
 
 };

@@ -585,7 +585,7 @@ Value Value::copy() {
     throw std::runtime_error(std::string(StringValue("'{}' object has no attribute 'copy'").format({this->type()})));
 }
 
-Value Value::format(const ListValue &aDatas) const {
+Value Value::format(const Value &aDatas) const {
     switch (this->mValueType) {
         case DataType::TYPE_STRING:
             return this->mData->s->format(aDatas);
@@ -938,8 +938,6 @@ Value::operator StringValue() const {
 }
 
 Value::operator ListValue() const {
-    std::cout << "数据" << std::endl;
-    std::cout << *this << std::endl;
     switch (this->mValueType) {
         case TYPE_LIST:
             return *this->mData->l;

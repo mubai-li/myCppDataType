@@ -34,7 +34,8 @@ std::size_t ValueHash::operator()(const Value &obj) const {
     switch (obj.mValueType) {
         case Value::DataType::TYPE_STRING: {
             // NOLINTNEXTLINE
-            for (StringValue::_stringType::const_iterator stringIndex = obj.mData->s->mData->begin(); stringIndex != obj.mData->s->mData->end(); stringIndex++) {
+            for (StringValue::_stringType::const_iterator stringIndex = obj.mData->s->mData->begin();
+                 stringIndex != obj.mData->s->mData->end(); stringIndex++) {
                 hash ^= std::hash<unsigned long long>()(*(*stringIndex)->mData->c->mData);
             }
             hash ^= std::hash<unsigned long long>()(obj.mValueType);
@@ -74,7 +75,8 @@ void DictValue::dictValue_ini() {
     this->mData = new _DICTTYPE;
     this->mDataCount = new int(1);
 }
-void DictValue::dictValue_ini(const DictValue &aOther){
+
+void DictValue::dictValue_ini(const DictValue &aOther) {
     this->mData = aOther.mData;
     this->mDataCount = aOther.mDataCount;
     (*this->mDataCount)++;
@@ -84,18 +86,19 @@ DictValue::DictValue() {
     this->dictValue_ini();
 
 }
-DictValue::DictValue(const DictValue &aOther){
+
+DictValue::DictValue(const DictValue &aOther) {
     this->dictValue_ini(aOther);
 }
 
 DictValue::~DictValue() {
     if (this->mDataCount != nullptr) {
-        if(*this->mDataCount == 1){
+        if (*this->mDataCount == 1) {
             delete this->mData;
             this->mData = nullptr;
             delete this->mDataCount;
             this->mDataCount = nullptr;
-        }else{
+        } else {
             (*this->mDataCount)--;
             this->mData = nullptr;
             this->mDataCount = nullptr;
@@ -131,9 +134,11 @@ Value DictValue::pop(const Value &key) {
     this->mData->extract(key);
     return result;
 }
-Value & DictValue::operator[](const Value &key){
+
+Value &DictValue::operator[](const Value &key) {
     return this->mData->at(key);
 }
+
 bool DictValue::operator==(const Value &aOther) const {
     switch (aOther.mValueType) {
         case Value::TYPE_NONE:
@@ -153,10 +158,35 @@ bool DictValue::operator==(const Value &aOther) const {
 }
 
 bool DictValue::operator>(const Value &aOther) const {
-    throw std::runtime_error(std::string(StringValue("dict types cannot be compared with {} types").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("dict types cannot be compared with {} types").format({aOther.type()})));
 }
 
 
 bool DictValue::operator<(const Value &aOther) const {
-    throw std::runtime_error(std::string(StringValue("dict types cannot be compared with {} types").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("dict types cannot be compared with {} types").format({aOther.type()})));
+}
+
+DictValue::operator char() const {
+    throw std::runtime_error(std::string(StringValue("dict types cannot be compared with char types")));
+}
+
+DictValue::operator char *() const {
+    return const_cast<char *>(this->operator std::string().c_str());
+
+}
+
+DictValue::operator std::string() const {
+
+    std::string resultString = "{";
+    for (_DICTTYPE::const_iterator data_index = this->mData->begin(); data_index != this->mData->end(); data_index++) {
+        resultString.append(std::string(data_index->first));
+        resultString.append(": ");
+        resultString.append(std::string(data_index->second));
+        resultString.append(", ");
+    }
+    std::string returnString = resultString.substr(resultString.length() - 2);
+    returnString.append("}");
+    return returnString;
 }

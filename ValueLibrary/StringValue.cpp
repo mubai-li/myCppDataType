@@ -11,7 +11,8 @@ std::ostream &operator<<(std::ostream &c, const StringValue &aStringValue) {
     c << "\"";
     if (aStringValue.mData != nullptr) {
         // NOLINTNEXTLINE
-        for (StringValue::_stringType::const_iterator stringValueBegin = aStringValue.mData->begin(); stringValueBegin != aStringValue.mData->end(); stringValueBegin++) {
+        for (StringValue::_stringType::const_iterator stringValueBegin = aStringValue.mData->begin();
+             stringValueBegin != aStringValue.mData->end(); stringValueBegin++) {
             c << **stringValueBegin;
         }
     }
@@ -44,7 +45,8 @@ Value StringValue::indexOf(int aPos) {
     // NOLINTNEXTLINE
     StringValue::_stringType::iterator resultDataIndex = resultStringValue.mData->begin();
     // NOLINTNEXTLINE
-    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin() + aPos; thisDataIndex != this->mData->end(); thisDataIndex++) {
+    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin() + aPos;
+         thisDataIndex != this->mData->end(); thisDataIndex++) {
         *resultDataIndex = new Value();
         (*resultDataIndex)->charValue_ini(**thisDataIndex);
         resultDataIndex++;
@@ -81,7 +83,8 @@ Value StringValue::indexOf(int aPos, int aEnd) {
     // NOLINTNEXTLINE
     StringValue::_stringType::iterator resultDataIndex = resultStringValue.mData->begin();
     // NOLINTNEXTLINE
-    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin() + aPos; thisDataIndex != this->mData->begin() + aEnd; thisDataIndex++) {
+    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin() + aPos;
+         thisDataIndex != this->mData->begin() + aEnd; thisDataIndex++) {
         *resultDataIndex = new Value();
         (*resultDataIndex)->charValue_ini(**thisDataIndex);
         resultDataIndex++;
@@ -130,7 +133,8 @@ StringValue StringValue::format(const ListValue &aDatas) const {
     // NOLINTNEXTLINE
     StringValue::_stringType::const_iterator thisDataEnd = this->mData->end();
     // NOLINTNEXTLINE
-    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin(); thisDataIndex != thisDataEnd; thisDataIndex++) {
+    for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin();
+         thisDataIndex != thisDataEnd; thisDataIndex++) {
         switch (*(*thisDataIndex)->mData->c->mData) {
             case '{': {
                 thisDataIndex++;
@@ -200,6 +204,7 @@ StringValue StringValue::format(const ListValue &aDatas) const {
 
     return resultString;
 }
+
 
 StringValue StringValue::center(const int &aFillInNumber, const StringValue &aOther) {
     return Tool::_StringCenterCN(*this->mData, aFillInNumber, *aOther.mData);
@@ -304,7 +309,8 @@ StringValue::operator std::string() const {
     // NOLINTNEXTLINE
     StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin();
     // NOLINTNEXTLINE
-    for (std::string::iterator resultStringIndex = resultString.begin(); resultStringIndex != resultString.end(); resultStringIndex++) {
+    for (std::string::iterator resultStringIndex = resultString.begin();
+         resultStringIndex != resultString.end(); resultStringIndex++) {
         *resultStringIndex = char(**thisDataIndex);
         thisDataIndex++;
     }
@@ -344,7 +350,8 @@ void StringValue::string_ini(const std::string &aValue) {
     this->mData->resize(aValue.size());
     std::string::const_iterator valueIndex = aValue.begin();
     // NOLINTNEXTLINE
-    for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin(); thisDataIndex != this->mData->end(); thisDataIndex++) {
+    for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin();
+         thisDataIndex != this->mData->end(); thisDataIndex++) {
         *thisDataIndex = new Value();
         (*thisDataIndex)->charValue_ini(*valueIndex);
         valueIndex++;
@@ -381,7 +388,8 @@ void StringValue::string_ini(const std::vector<Value *> &aValue) {
     // NOLINTNEXTLINE
     StringValue::_stringType::const_iterator valueIndex = aValue.begin();
     // NOLINTNEXTLINE
-    for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin(); thisDataIndex != this->mData->end(); thisDataIndex++) {
+    for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin();
+         thisDataIndex != this->mData->end(); thisDataIndex++) {
         *thisDataIndex = new Value();
         (*thisDataIndex)->charValue_ini(**valueIndex);
         valueIndex++;
@@ -441,7 +449,8 @@ StringValue::~StringValue() {
 
     if (*this->mStringCount == 1) {
         // NOLINTNEXTLINE
-        for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin(); thisDataIndex != this->mData->end(); thisDataIndex++) {
+        for (StringValue::_stringType::iterator thisDataIndex = this->mData->begin();
+             thisDataIndex != this->mData->end(); thisDataIndex++) {
             delete *thisDataIndex;
         }
 
@@ -545,7 +554,8 @@ StringValue &StringValue::operator+=(const Value &aOther) {
             *this += *aOther.mData->s;
             break;
         default: {
-            throw std::runtime_error(std::string(StringValue("unsupported operand type(s) for +: str and {}").format({aOther.type()})));
+            throw std::runtime_error(
+                    std::string(StringValue("unsupported operand type(s) for +: str and {}").format({aOther.type()})));
 
         }
     }
@@ -590,7 +600,8 @@ StringValue StringValue::operator+(const Value &aOther) const {
         case Value::TYPE_DICT:
             break;
     }
-    throw std::runtime_error(std::string(StringValue("unsupported operand type(s) for +: \"str\" and {}").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("unsupported operand type(s) for +: \"str\" and {}").format({aOther.type()})));
 }
 
 bool StringValue::compair(const StringValue &aOther, const CompairType &aCom) const {
@@ -616,7 +627,8 @@ bool StringValue::compair(const StringValue &aOther, const CompairType &aCom) co
                 return false;
             }
             // NOLINTNEXTLINE
-            for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin(); thisDataIndex != this->mData->end(); thisDataIndex++) {
+            for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin();
+                 thisDataIndex != this->mData->end(); thisDataIndex++) {
                 if (!this->comSymbo(*(*thisDataIndex)->mData->c, *(*otherDataIndex)->mData->c, aCom)) {
                     return false;
                 }
@@ -631,7 +643,8 @@ bool StringValue::compair(const StringValue &aOther, const CompairType &aCom) co
         case GT:
         case LT: {
             // NOLINTNEXTLINE
-            for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin(); thisDataIndex != this->mData->end(); thisDataIndex++) {
+            for (StringValue::_stringType::const_iterator thisDataIndex = this->mData->begin();
+                 thisDataIndex != this->mData->end(); thisDataIndex++) {
                 if (this->comSymbo(*(*thisDataIndex)->mData->c, *(*otherDataIndex)->mData->c, aCom)) {
                     return true;
                 } else if (*(*thisDataIndex)->mData->c == *(*otherDataIndex)->mData->c) {
@@ -690,7 +703,8 @@ bool StringValue::operator>(const Value &aOther) const {
         case Value::TYPE_DICT:
             break;
     }
-    throw std::runtime_error(std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
 
 }
 
@@ -732,7 +746,8 @@ bool StringValue::operator<(const Value &aOther) const {
         case Value::TYPE_DICT:
             break;
     }
-    throw std::runtime_error(std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
 }
 
 bool StringValue::operator<=(const StringValue &aOther) const {
@@ -773,7 +788,8 @@ bool StringValue::operator==(const Value &aOther) const {
         case Value::TYPE_DICT:
             break;
     }
-    throw std::runtime_error(std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
+    throw std::runtime_error(
+            std::string(StringValue("str types cannot be compared with {} types").format({aOther.type()})));
 }
 
 bool StringValue::operator!=(const StringValue &aOther) const {
@@ -791,3 +807,4 @@ bool StringValue::operator!=(const Value &aOther) const {
     return !this->operator==(aOther);
 
 }
+

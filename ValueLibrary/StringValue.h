@@ -95,6 +95,7 @@ public:
 
     // NOLINTNEXTLINE
     StringValue format(const ListValue &aDatas) const;
+//     NOLINTNEXTLINE
 
     StringValue center(const int &aFillInNumber, const StringValue &aOther);
 

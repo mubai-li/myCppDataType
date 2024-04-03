@@ -217,7 +217,7 @@ public:
     Value copy();
 
     // NOLINTNEXTLINE
-    Value format(const ListValue &aDatas) const;
+    Value format(const Value &aDatas) const;
 
     Value center(const int &aFillInNumber, const Value &aOther);
 
